@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>修改密码</title>
+    <meta name="description" content="MSUI: Build mobile apps with simple HTML, CSS, and JS components.">
+    <meta name="author" content="阿里巴巴国际UED前端">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- Google Web Fonts -->
+
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
+    <script>
+        //ga
+    </script>
+</head>
+<body>
+<div class="page-group">
+    <div id="page-label-input" class="page">
+        <header class="bar bar-nav">
+            <h1 class="title">修改密码</h1>
+        </header>
+        <div class="content">
+            <div class="list-block">
+                <ul>
+                    <!-- Text inputs -->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">用户名</div>
+                                <div class="item-input">
+                                    <input type="text" placeholder="用户名" id="userName">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">原密码</div>
+                                <div class="item-input">
+                                    <input type="password" placeholder="原密码" id="oldPassword">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">新密码</div>
+                                <div class="item-input">
+                                    <input type="password" placeholder="新密码" id="newPassword">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">确认新密码</div>
+                                <div class="item-input">
+                                    <input type="password" placeholder="新密码" id="confirmPassword">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!--验证码 kaptcha，用户点击三次后显示-->
+                    <li id="checkCode">
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">验证码</div>
+                                <input type="text" id="j_kaptcha" placeholder="请输入验证码"/>
+                                <div class="item-input">
+                                    <img id="kaptcha-img" src="/o2o/Kaptcha" title="点击更换图片"
+                                         alt="点击更换图片" onclick="changeVerifyCode(this)">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="content-block">
+                <div class="row">
+                    <div class="col-50"><a href="#" class="button button-big button-fill button-success"
+                                           id="back">返回主页面</a></div>
+                    <div class="col-50"><a href="#" class="button button-big button-fill button-success"
+                                           id="modify">提交</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src='///g.alicdn.com/sj/lib/zepto/zepto.min.js'></script>
+<script src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js'></script>
+<script src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js'></script>
+<script type="text/javascript" src="../resources/js/local/changepswpage.js" charset="utf-8"></script>
+<script type="text/javascript" src="../resources/js/common/common.js" charset="utf-8"></script>
+</body>
+</html>

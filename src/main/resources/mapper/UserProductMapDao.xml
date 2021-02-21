@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imooc.o2o.dao.UserProductMapDao">
+    <resultMap id="userProductMap" type="com.imooc.o2o.entity.UserProductMap">
+        <id column="user_product_id" property="userProductId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="point" property="point"/>
+        <association property="user" column="user_id" javaType="com.imooc.o2o.entity.PersonInfo">
+            <id column="user_id" property="userId"/>
+            <result column="buyer_name" property="name"/>
+        </association>
+        <association property="operator" column="operator_id" javaType="com.imooc.o2o.entity.PersonInfo">
+            <id column="operator_id" property="userId"/>
+            <result column="operator_name" property="name"/>
+        </association>
+        <association property="shop" column="shop_id" javaType="com.imooc.o2o.entity.Shop">
+            <id column="shop_id" property="shopId"/>
+            <result column="shop_name" property="shopName"/>
+        </association>
+        <association property="product" column="product_id" javaType="com.imooc.o2o.entity.Product">
+            <id column="product_id" property="productId"/>
+            <result column="product_name" property="productName"/>
+            <result column="product_desc" property="productDesc"/>
+            <result column="img_addr" property="imgAddr"/>
+            <result column="normal_price" property="normalPrice"/>
+            <result column="promotion_price" property="promotionPrice"/>
+        </association>
+    </resultMap>
+
+    <select id="queryUserProductList" resultMap="userProductMap">
+        select userProduct.user_product_id,userProduct.user_id,userProduct.shop_id,userProduct.product_id,
+               userProduct.operator_id,userProduct.create_time,userProduct.point,
+               buyer.name as buyer_name,operator.name as operator_name,shop.shop_name,
+               product.product_id,product.product_name,product.product_desc,product.img_addr,product.normal_price,
+               product.promotion_price
+        from tb_user_product_map userProduct
+        left join tb_person_info buyer on buyer.user_id = userProduct.user_id
+        left join tb_person_info operator on operator.user_id = userProduct.operator_id
+        left join tb_shop shop on shop.shop_id = userProduct.shop_id
+        left join tb_product product on product.product_id = userProduct.product_id
+        <where>
+            <!--根据用户id和用户名查询-->
+            <if test="userProduct.user != null and userProduct.user.userId != null">and userProduct.user_id = #{userProduct.user.userId}</if>
+            <if test="userProduct.user != null and userProduct.user.name != null">and buyer.name like '%${userProduct.user.name}%'</if>
+            <if test="userProduct.createTime != null">and userProduct.create_time = #{userProduct.createTime}</if>
+            <if test="userProduct.product != null and userProduct.product.productId != null">and userProduct.product_id = #{userProduct.product.produtcId}</if>
+            <if test="userProduct.product != null and userProduct.product.productName != null">and product.product_name like '%${userProduct.product.productName}%'</if>
+        </where>
+        order by userProduct.create_time desc limit #{rowIndex},#{pageSize};
+    </select>
+
+    <select id="queryUserProductCount" resultType="int">
+        select count(1)
+        from tb_user_product_map userProduct
+        left join tb_person_info buyer on buyer.user_id = userProduct.user_id
+        left join tb_person_info operator on operator.user_id = userProduct.operator_id
+        left join tb_shop shop on shop.shop_id = userProduct.shop_id
+        left join tb_product product on product.product_id = userProduct.product_id
+        <where>
+            <!--根据用户id和用户名查询-->
+            <if test="userProduct.user != null and userProduct.user.userId != null">and userProduct.user_id = #{userProduct.user.userId}</if>
+            <if test="userProduct.user != null and userProduct.user.name != null">and buyer.name like '%${userProduct.user.name}%'</if>
+            <!--面对商家，商家日统计某件商品卖出情况-->
+            <if test="userProduct.shop != null and userProduct.shop.shopId != null">and userProduct.shop_id = #{userProduct.shop.shopId}</if>
+            <if test="userProduct.createTime != null">and userProduct.create_time = #{userProduct.createTime}</if>
+            <if test="userProduct.product != null and userProduct.product.productId != null">and userProduct.product_id = #{userProduct.product.produtcId}</if>
+            <if test="userProduct.product != null and userProduct.product.productName != null">and product.product_name like '%${userProduct.product.productName}%'</if>
+        </where>
+    </select>
+
+    <insert id="insertUserProduct" useGeneratedKeys="true" keyColumn="user_product_id" keyProperty="userProductId">
+        insert into tb_user_product_map(user_id,shop_id,product_id,operator_id,create_time,point)
+        values(#{user.userId},#{shop.shopId},#{product.productId},#{operator.userId},#{createTime},#{point});
+    </insert>
+</mapper>

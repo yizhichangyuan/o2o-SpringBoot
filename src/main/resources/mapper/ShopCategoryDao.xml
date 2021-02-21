@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imooc.o2o.dao.ShopCategoryDao">
+    <!--应对两个场景
+    场景1：商家注册店铺时，选择店铺类别，数据库查询肯定是所有店铺类别，所以不是一级类别，对应数据库中所有parent_id不为空，不是一级
+    场景2：用户选择店铺类别的时候，肯定是一级一级往下选的，所以选择是对应级别的子类，对应的parent_id是前端返回的指定id
+    -->
+    <select id="queryShopCategory" resultType="com.imooc.o2o.entity.ShopCategory">
+        SELECT shop_category_id,shop_category_name,shop_category_desc,shop_category_img,
+               priority,create_time,last_edit_time,parent_id
+        FROM tb_shop_category
+        <where>
+            <if test="shopCategoryCondition == null">
+                and parent_id is null
+            </if>
+            <if test="shopCategoryCondition != null">
+                and parent_id is not null
+            </if>
+            <if test="shopCategoryCondition != null and shopCategoryCondition.parent != null
+            and shopCategoryCondition.parent.shopCategoryId != null">
+                and parent_id = #{shopCategoryCondition.parent.shopCategoryId}
+            </if>
+        </where>
+        ORDER BY priority DESC;
+    </select>
+</mapper>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imooc.o2o.dao.UserAwardMapDao">
+    <resultMap id="userAwardMap" type="com.imooc.o2o.entity.UserAwardMap">
+        <id property="userAwardId" column="user_award_id"/>
+        <result property="point" column="point"/>
+        <result property="createTime" column="user_award_create_time"/>
+        <result property="lastEditTime" column="user_award_last_edit_time"/>
+        <result property="usedStatus" column="used_status"/>
+        <association property="user" column="user_id">
+            <id column="user_id" property="userId"/>
+            <result column="buyer_name" property="name"/>
+        </association>
+        <association property="shop" column="shop_id" javaType="com.imooc.o2o.entity.Shop">
+            <id column="shop_id" property="shopId"/>
+            <result column="shop_name" property="shopName"/>
+        </association>
+        <association property="award" column="award_id" javaType="com.imooc.o2o.entity.Award">
+            <id column="award_id" property="awardId"/>
+            <result column="award_name" property="awardName"/>
+            <result column="award_desc" property="awardDesc"/>
+            <result column="award_img" property="awardImg"/>
+            <result column="award_point" property="point"/>
+        </association>
+        <association property="operator" column="operator_id" javaType="com.imooc.o2o.entity.PersonInfo">
+            <id column="operator_id" property="userId"/>
+            <id column="operator_name" property="name"/>
+        </association>
+    </resultMap>
+
+    <insert id="insertUserAward" useGeneratedKeys="true" keyColumn="user_award_id" keyProperty="userAwardId">
+        insert into tb_user_award_map(user_id, shop_id, award_id,
+                                      operator_id, point, create_time, last_edit_time, used_status)
+                                      values(#{user.userId}, #{shop.shopId},#{award.awardId},#{operator.userId},
+                                             #{point},#{createTime},#{lastEditTime},#{usedStatus});
+    </insert>
+
+    <delete id="deleteUserAward">
+        delete from tb_user_award_map where award_id = #{awardId};
+    </delete>
+
+    <update id="updateUserAward">
+        update tb_user_award_map
+        <set>
+            <if test="usedStatus != null">used_status = #{usedStatus},</if>
+            <if test="lastEditTime != null">last_edit_time = #{lastEditTime}</if>
+        </set>
+        where user_award_id = #{userAwardId} and user_id = #{userId};
+    </update>
+
+    <select id="queryUserAwardById" resultMap="userAwardMap">
+        select ua.user_award_id,ua.user_id,ua.shop_id,ua.award_id,ua.operator_id,ua.point,
+               ua.create_time as user_award_create_time,ua.last_edit_time as user_award_last_edit_time,
+               ua.used_status,u.name as buyer_name,s.shop_name,a.award_name,a.award_desc,a.award_img,
+               a.point as award_point,op.name as operator_name from tb_user_award_map ua
+               left join tb_award a on ua.award_id = a.award_id
+               left join tb_person_info u on ua.user_id = u.user_id
+               left join tb_person_info op on ua.operator_id = u.user_id
+               left join tb_shop s on ua.shop_id = s.shop_id
+                where user_award_id = #{userAwardId};
+    </select>
+
+    <select id="queryUserAwardList" resultMap="userAwardMap">
+        select ua.user_award_id,ua.user_id,ua.shop_id,ua.award_id,ua.operator_id,ua.point,
+               ua.create_time as user_award_create_time,ua.last_edit_time as user_award_last_edit_time,
+               ua.used_status,u.name as buyer_name,s.shop_name,a.award_name,a.award_desc,a.award_img,
+               a.point as award_point,op.name as operator_name from tb_user_award_map ua
+                left join tb_award a on ua.award_id = a.award_id
+                left join tb_person_info u on ua.user_id = u.user_id
+                left join tb_person_info op on ua.operator_id = op.user_id
+                left join tb_shop s on ua.shop_id = s.shop_id
+        <where>
+            <!--买家精确查询、买家用户名模糊-->
+            <if test="userAward.user != null and userAward.user.userId != null">and ua.user_id = #{userAward.user.userId}</if>
+            <if test="userAward.user != null and userAward.user.name != null">and u.name like '%${userAward.user.name}%'</if>
+            <!--操作员精确查询、名称模糊查询-->
+            <if test="userAward.operator != null and userAward.operator.userId != null">and ua.operator_id = #{userAward.operator.userId}</if>
+            <if test="userAward.operator != null and userAward.operator.name != null">and ua.operator_id = #{userAward.operator.name}</if>
+            <!--商品id精确-->
+            <if test="userAward.award != null and userAward.award.awardId != null">and a.award_id = #{userAward.award.awardId}</if>
+            <!--商品名模糊查询-->
+            <if test="userAward.award != null and userAward.award.awardName != null">and a.award_name like '%${userAward.award.awardName}%'</if>
+           <!--商品可用状态查询-->
+            <if test="userAward.award != null and userAward.award.enableStatus != null">and a.award_name = #{userAward.award.enableStatus}</if>
+        </where>
+        order by ua.last_edit_time desc limit #{rowIndex},#{pageSize};
+    </select>
+
+    <select id="queryUserAwardCount" resultType="int">
+        select count(1) from tb_user_award_map ua
+        left join tb_award a on ua.award_id = a.award_id
+        left join tb_person_info u on ua.user_id = u.user_id
+        left join tb_person_info op on ua.operator_id = op.user_id
+        left join tb_shop s on ua.shop_id = s.shop_id
+        <where>
+            <!--买家精确查询、买家用户名模糊-->
+            <if test="userAward.user != null and userAward.user.userId != null">and ua.user_id = #{userAward.user.userId}</if>
+            <if test="userAward.user != null and userAward.user.name != null">and u.name like '%${userAward.user.name}%'</if>
+            <!--操作员精确查询、名称模糊查询-->
+            <if test="userAward.operator != null and userAward.operator.userId != null">and ua.operator_id = #{userAward.operator.userId}</if>
+            <if test="userAward.operator != null and userAward.operator.name != null">and ua.operator_id = #{userAward.operator.name}</if>
+            <!--商品id精确-->
+            <if test="userAward.award != null and userAward.award.awardId != null">and a.award_id = #{userAward.award.awardId}</if>
+            <!--商品名模糊查询-->
+            <if test="userAward.award != null and userAward.award.awardName != null">and a.award_name like '%${userAward.award.awardName}%'</if>
+            <!--商品可用状态查询-->
+            <if test="userAward.award != null and userAward.award.enableStatus != null">and a.enable_status = #{userAward.award.enableStatus}</if>
+        </where>
+    </select>
+</mapper>

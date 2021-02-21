@@ -1,0 +1,45 @@
+2021-02-21 09:22:52.810 [restartedMain] DEBUG com.imooc.o2o.O2oApplication -Running with Spring Boot v2.4.2, Spring v5.3.3
+2021-02-21 09:23:14.363 [restartedMain] DEBUG com.imooc.o2o.O2oApplication -Running with Spring Boot v2.4.2, Spring v5.3.3
+2021-02-21 09:23:25.606 [http-nio-8080-exec-7] DEBUG c.imooc.o2o.dao.split.DynamicDataSourceInterceptor -设置方法[com.imooc.o2o.dao.LocalAuthDao.queryLocalAuthByUserNameAndPASD] use[slave] Strategy,SqlCommandType[SELECT]...
+2021-02-21 09:23:25.607 [http-nio-8080-exec-7] DEBUG com.imooc.o2o.dao.split.DynamicDataSourceHolder -所使用的数据源为：slave
+2021-02-21 09:23:26.234 [http-nio-8080-exec-7] DEBUG c.i.o.d.L.queryLocalAuthByUserNameAndPASD -==>  Preparing: select l.local_auth_id, l.user_name, l.password, l.create_time as local_create_time, l.last_edit_time as local_last_edit_time, p.user_id, p.name, p.profile_img, p.email, p.gender, p.enable_status, p.user_type, p.create_time, p.last_edit_time from tb_local_auth l left join tb_person_info p on l.user_id = p.user_id where l.user_name = ? and l.password = ?;
+2021-02-21 09:23:26.247 [http-nio-8080-exec-7] DEBUG c.i.o.d.L.queryLocalAuthByUserNameAndPASD -==> Parameters: test(String), s05bse6q2qlb9qblls96s592y55y556s(String)
+2021-02-21 09:23:26.292 [http-nio-8080-exec-7] DEBUG c.i.o.d.L.queryLocalAuthByUserNameAndPASD -<==      Total: 1
+2021-02-21 09:23:26.578 [http-nio-8080-exec-2] DEBUG c.imooc.o2o.dao.split.DynamicDataSourceInterceptor -设置方法[com.imooc.o2o.dao.ShopDao.queryShopList] use[slave] Strategy,SqlCommandType[SELECT]...
+2021-02-21 09:23:26.578 [http-nio-8080-exec-2] DEBUG com.imooc.o2o.dao.split.DynamicDataSourceHolder -所使用的数据源为：slave
+2021-02-21 09:23:26.616 [http-nio-8080-exec-2] DEBUG com.imooc.o2o.dao.ShopDao.queryShopList -==>  Preparing: select s.shop_id, s.shop_name, s.shop_desc, s.shop_addr, s.phone, s.shop_img, s.priority, s.enable_status, s.create_time, s.last_edit_time, s.advice, a.area_id, a.area_name, sc.shop_category_id, sc.shop_category_name FROM tb_shop s, tb_shop_category sc, tb_area a WHERE s.owner_id = ? and s.shop_category_id = sc.shop_category_id and s.area_id = a.area_id ORDER BY s.priority DESC LIMIT ?, ?;
+2021-02-21 09:23:26.616 [http-nio-8080-exec-2] DEBUG com.imooc.o2o.dao.ShopDao.queryShopList -==> Parameters: 1(Long), 0(Integer), 100(Integer)
+2021-02-21 09:23:26.655 [http-nio-8080-exec-2] DEBUG com.imooc.o2o.dao.ShopDao.queryShopList -<==      Total: 7
+2021-02-21 09:23:26.656 [http-nio-8080-exec-2] DEBUG c.imooc.o2o.dao.split.DynamicDataSourceInterceptor -设置方法[com.imooc.o2o.dao.ShopDao.queryShopCount] use[slave] Strategy,SqlCommandType[SELECT]...
+2021-02-21 09:23:26.656 [http-nio-8080-exec-2] DEBUG com.imooc.o2o.dao.split.DynamicDataSourceHolder -所使用的数据源为：slave
+2021-02-21 09:23:26.692 [http-nio-8080-exec-2] DEBUG com.imooc.o2o.dao.ShopDao.queryShopCount -==>  Preparing: SELECT COUNT(1) FROM tb_shop s, tb_shop_category sc, tb_area a WHERE s.shop_category_id = sc.shop_category_id and s.area_id = a.area_id and s.owner_id = ? ORDER BY s.priority DESC;
+2021-02-21 09:23:26.693 [http-nio-8080-exec-2] DEBUG com.imooc.o2o.dao.ShopDao.queryShopCount -==> Parameters: 1(Long)
+2021-02-21 09:23:26.725 [http-nio-8080-exec-2] DEBUG com.imooc.o2o.dao.ShopDao.queryShopCount -<==      Total: 1
+2021-02-21 09:24:13.965 [http-nio-8080-exec-2] DEBUG c.imooc.o2o.dao.split.DynamicDataSourceInterceptor -设置方法[com.imooc.o2o.dao.ShopAuthMapDao.queryShopAuthMapListById] use[slave] Strategy,SqlCommandType[SELECT]...
+2021-02-21 09:24:13.965 [http-nio-8080-exec-2] DEBUG com.imooc.o2o.dao.split.DynamicDataSourceHolder -所使用的数据源为：slave
+2021-02-21 09:24:14.000 [http-nio-8080-exec-2] DEBUG c.i.o.dao.ShopAuthMapDao.queryShopAuthMapListById -==>  Preparing: select sam.shop_auth_id,sam.shop_id,sam.employee_id,sam.title,sam.title_flag,sam.create_time,sam.last_edit_time, sam.enable_status,s.shop_name,u.name from tb_shop_auth_map sam left join tb_shop s on s.shop_id = sam.shop_id left join tb_person_info u on sam.employee_id = u.user_id where sam.shop_id = ? order by sam.create_time desc limit ?,?;
+2021-02-21 09:24:14.001 [http-nio-8080-exec-2] DEBUG c.i.o.dao.ShopAuthMapDao.queryShopAuthMapListById -==> Parameters: 79(Long), 0(Integer), 100(Integer)
+2021-02-21 09:24:14.034 [http-nio-8080-exec-2] DEBUG c.i.o.dao.ShopAuthMapDao.queryShopAuthMapListById -<==      Total: 2
+2021-02-21 09:24:14.036 [http-nio-8080-exec-2] DEBUG c.imooc.o2o.dao.split.DynamicDataSourceInterceptor -设置方法[com.imooc.o2o.dao.ShopAuthMapDao.queryShopAuthMapCount] use[slave] Strategy,SqlCommandType[SELECT]...
+2021-02-21 09:24:14.036 [http-nio-8080-exec-2] DEBUG com.imooc.o2o.dao.split.DynamicDataSourceHolder -所使用的数据源为：slave
+2021-02-21 09:24:14.073 [http-nio-8080-exec-2] DEBUG c.i.o2o.dao.ShopAuthMapDao.queryShopAuthMapCount -==>  Preparing: select count(1) from tb_shop_auth_map sam left join tb_shop s on s.shop_id = sam.shop_id left join tb_person_info u on sam.employee_id = u.user_id where sam.shop_id = ?;
+2021-02-21 09:24:14.073 [http-nio-8080-exec-2] DEBUG c.i.o2o.dao.ShopAuthMapDao.queryShopAuthMapCount -==> Parameters: 79(Long)
+2021-02-21 09:24:14.106 [http-nio-8080-exec-2] DEBUG c.i.o2o.dao.ShopAuthMapDao.queryShopAuthMapCount -<==      Total: 1
+2021-02-21 09:33:28.017 [main] DEBUG com.imooc.o2o.O2oApplicationTests -Running with Spring Boot v2.4.2, Spring v5.3.3
+2021-02-21 13:26:34.941 [main] DEBUG com.imooc.o2o.O2oApplicationTests -Running with Spring Boot v2.4.2, Spring v5.3.3
+2021-02-21 13:30:28.483 [restartedMain] DEBUG com.imooc.o2o.O2oApplication -Running with Spring Boot v2.4.2, Spring v5.3.3
+2021-02-21 13:31:05.690 [http-nio-8080-exec-7] DEBUG c.imooc.o2o.dao.split.DynamicDataSourceInterceptor -设置方法[com.imooc.o2o.dao.LocalAuthDao.queryLocalAuthByUserNameAndPASD] use[slave] Strategy,SqlCommandType[SELECT]...
+2021-02-21 13:31:05.691 [http-nio-8080-exec-7] DEBUG com.imooc.o2o.dao.split.DynamicDataSourceHolder -所使用的数据源为：slave
+2021-02-21 13:31:06.340 [http-nio-8080-exec-7] DEBUG c.i.o.d.L.queryLocalAuthByUserNameAndPASD -==>  Preparing: select l.local_auth_id, l.user_name, l.password, l.create_time as local_create_time, l.last_edit_time as local_last_edit_time, p.user_id, p.name, p.profile_img, p.email, p.gender, p.enable_status, p.user_type, p.create_time, p.last_edit_time from tb_local_auth l left join tb_person_info p on l.user_id = p.user_id where l.user_name = ? and l.password = ?;
+2021-02-21 13:31:06.353 [http-nio-8080-exec-7] DEBUG c.i.o.d.L.queryLocalAuthByUserNameAndPASD -==> Parameters: test(String), s05bse6q2qlb9qblls96s592y55y556s(String)
+2021-02-21 13:31:06.396 [http-nio-8080-exec-7] DEBUG c.i.o.d.L.queryLocalAuthByUserNameAndPASD -<==      Total: 1
+2021-02-21 13:31:06.674 [http-nio-8080-exec-2] DEBUG c.imooc.o2o.dao.split.DynamicDataSourceInterceptor -设置方法[com.imooc.o2o.dao.ShopDao.queryShopList] use[slave] Strategy,SqlCommandType[SELECT]...
+2021-02-21 13:31:06.674 [http-nio-8080-exec-2] DEBUG com.imooc.o2o.dao.split.DynamicDataSourceHolder -所使用的数据源为：slave
+2021-02-21 13:31:06.722 [http-nio-8080-exec-2] DEBUG com.imooc.o2o.dao.ShopDao.queryShopList -==>  Preparing: select s.shop_id, s.shop_name, s.shop_desc, s.shop_addr, s.phone, s.shop_img, s.priority, s.enable_status, s.create_time, s.last_edit_time, s.advice, a.area_id, a.area_name, sc.shop_category_id, sc.shop_category_name FROM tb_shop s, tb_shop_category sc, tb_area a WHERE s.owner_id = ? and s.shop_category_id = sc.shop_category_id and s.area_id = a.area_id ORDER BY s.priority DESC LIMIT ?, ?;
+2021-02-21 13:31:06.723 [http-nio-8080-exec-2] DEBUG com.imooc.o2o.dao.ShopDao.queryShopList -==> Parameters: 1(Long), 0(Integer), 100(Integer)
+2021-02-21 13:31:06.765 [http-nio-8080-exec-2] DEBUG com.imooc.o2o.dao.ShopDao.queryShopList -<==      Total: 7
+2021-02-21 13:31:06.766 [http-nio-8080-exec-2] DEBUG c.imooc.o2o.dao.split.DynamicDataSourceInterceptor -设置方法[com.imooc.o2o.dao.ShopDao.queryShopCount] use[slave] Strategy,SqlCommandType[SELECT]...
+2021-02-21 13:31:06.766 [http-nio-8080-exec-2] DEBUG com.imooc.o2o.dao.split.DynamicDataSourceHolder -所使用的数据源为：slave
+2021-02-21 13:31:06.797 [http-nio-8080-exec-2] DEBUG com.imooc.o2o.dao.ShopDao.queryShopCount -==>  Preparing: SELECT COUNT(1) FROM tb_shop s, tb_shop_category sc, tb_area a WHERE s.shop_category_id = sc.shop_category_id and s.area_id = a.area_id and s.owner_id = ? ORDER BY s.priority DESC;
+2021-02-21 13:31:06.797 [http-nio-8080-exec-2] DEBUG com.imooc.o2o.dao.ShopDao.queryShopCount -==> Parameters: 1(Long)
+2021-02-21 13:31:06.830 [http-nio-8080-exec-2] DEBUG com.imooc.o2o.dao.ShopDao.queryShopCount -<==      Total: 1

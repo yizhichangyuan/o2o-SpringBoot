@@ -1,0 +1,73 @@
+.index-banner {
+    height: 35%;
+    padding-bottom: 0.4rem;
+}
+
+.img-wrap {
+    overflow: hidden;
+}
+
+.banner-img {
+    width: 100%;
+    height: 100%;
+}
+
+.total-shop-button {
+    margin-top: .5rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    padding-left: 0.85rem;
+    margin-bottom: 0.4rem;
+    position: relative;
+    cursor: pointer;
+}
+
+.total-shop-button:before {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    width: 0.15rem;
+    height: 1.5rem;
+    background-color: #0894ec;
+}
+
+.list-block {
+    margin-top: .5rem;
+}
+
+.shop-classify {
+    margin-top: 0;
+    cursor: pointer;
+    height: 3.3rem;
+    width: 0.2rem;
+}
+
+.shop-classify .word {
+    width: 65%;
+    height: 100%;
+    overflow: hidden;
+    float: left;
+}
+
+.shop-classify > .word > shop-info > .shop-title {
+    margin: 0;
+    font-size: 0.8rem;
+}
+
+.shop-classify > .word > .shop-desc {
+    margin: 0;
+    font-size: 0.6rem;
+}
+
+.shop-classify > .shop-classify-img-warp {
+    width: 30%;
+    height: 100%;
+    margin-left: 0.2rem;
+    display: inline-block;
+}
+
+.shop-classify > img {
+    width: 100%;
+    heigth: 100%;
+}

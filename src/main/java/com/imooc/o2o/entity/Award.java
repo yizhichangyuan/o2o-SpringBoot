@@ -1,0 +1,125 @@
+package com.imooc.o2o.entity;
+
+import java.io.Serializable;
+import java.util.Date;
+
+/**
+ * (TbAward)实体类
+ *
+ * @author makejava
+ * @since 2021-02-14 16:00:04
+ */
+public class Award implements Serializable {
+    private static final long serialVersionUID = -45829077566949922L;
+
+    /**
+     * 积分奖品id，主键
+     */
+    private Integer awardId;
+
+    private String awardName;
+
+    private String awardDesc;
+
+    private String awardImg;
+
+    /**
+     * 奖品兑换积分，默认为0
+     */
+    private Integer point;
+
+    private Integer shopId;
+
+    private Integer priority;
+
+    private Date createTime;
+
+    private Date lastEditTime;
+
+    /**
+     * 0：未上架 1：上架
+     */
+    private Integer enableStatus;
+
+
+    public Integer getAwardId() {
+        return awardId;
+    }
+
+    public void setAwardId(Integer awardId) {
+        this.awardId = awardId;
+    }
+
+    public String getAwardName() {
+        return awardName;
+    }
+
+    public void setAwardName(String awardName) {
+        this.awardName = awardName;
+    }
+
+    public String getAwardDesc() {
+        return awardDesc;
+    }
+
+    public void setAwardDesc(String awardDesc) {
+        this.awardDesc = awardDesc;
+    }
+
+    public String getAwardImg() {
+        return awardImg;
+    }
+
+    public void setAwardImg(String awardImg) {
+        this.awardImg = awardImg;
+    }
+
+    public Integer getPoint() {
+        return point;
+    }
+
+    public void setPoint(Integer point) {
+        this.point = point;
+    }
+
+    public Integer getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(Integer shopId) {
+        this.shopId = shopId;
+    }
+
+    public Integer getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Integer priority) {
+        this.priority = priority;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getLastEditTime() {
+        return lastEditTime;
+    }
+
+    public void setLastEditTime(Date lastEditTime) {
+        this.lastEditTime = lastEditTime;
+    }
+
+    public Integer getEnableStatus() {
+        return enableStatus;
+    }
+
+    public void setEnableStatus(Integer enableStatus) {
+        this.enableStatus = enableStatus;
+    }
+
+}

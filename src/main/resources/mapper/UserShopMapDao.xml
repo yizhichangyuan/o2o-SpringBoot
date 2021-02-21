@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imooc.o2o.dao.UserShopMapDao">
+    <resultMap id="userShopMap" type="com.imooc.o2o.entity.UserShopMap">
+        <id column="user_shop_id" property="userShopId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="point" property="point"/>
+        <association property="user" column="user_id" javaType="com.imooc.o2o.entity.PersonInfo">
+            <id column="user_id" property="userId"/>
+            <result column="name" property="name"/>
+        </association>
+        <association property="shop" column="shop_id" javaType="com.imooc.o2o.entity.Shop">
+            <id column="shop_id" property="shopId"/>
+            <result column="shop_name" property="shopName"/>
+        </association>
+    </resultMap>
+
+    <insert id="insertUserShopMap" useGeneratedKeys="true" keyColumn="user_shop_id" keyProperty="userShopId">
+        insert into tb_user_shop_map(user_id,shop_id,point,create_time)
+        values(#{user.userId},#{shop.shopId},#{point},#{createTime});
+    </insert>
+
+    <update id="updateUserShopMap">
+        update tb_user_shop_map set point = #{point} where user_id = #{userId} and shop_id = #{shopId};
+    </update>
+
+    <select id="queryUserShopMapList" resultMap="userShopMap">
+        select usm.user_shop_id,usm.user_id,usm.shop_id,usm.point,usm.create_time,
+               s.shop_name,u.name
+        from tb_user_shop_map usm
+        left join tb_person_info u on usm.user_id = u.user_id
+        left join tb_shop s on usm.shop_id = s.shop_id
+        <where>
+            <!--顾客查询-->
+            <if test="userShop.user != null and userShop.user.userId != null">and usm.user_id = #{userShop.user.userId}</if>
+            <if test="userShop.user != null and userShop.user.name != null">and u.name like '%${userShop.user.name}%'</if>
+            <!--商家查询-->
+            <if test="userShop.shop != null and userShop.shop.shopId != null">and usm.shop_id = #{userShop.shop.shopId}</if>
+            <if test="userShop.shop != null and userShop.shop.shopName != null">and s.shop_name like '%${userShop.shop.shopName}%'</if>
+            <!--新入会用户查询-->
+            <if test="userShop.createTime != null">usm.create_time $lt;= #{userShop.createTime}</if>
+        </where>
+        order by usm.create_time desc limit #{rowIndex},#{pageSize};
+    </select>
+
+    <select id="queryUserShopMapById" resultMap="userShopMap">
+        select usm.user_shop_id,usm.user_id,usm.shop_id,usm.point,usm.create_time,
+               s.shop_name,u.name
+        from tb_user_shop_map usm
+                 left join tb_person_info u on usm.user_id = u.user_id
+                 left join tb_shop s on usm.shop_id = s.shop_id
+        where usm.user_id = #{userId} and usm.shop_id = #{shopId};
+    </select>
+
+    <select id="queryUserShopMapCount" resultType="int">
+        select count(1)
+        from tb_user_shop_map usm
+                 left join tb_person_info u on usm.user_id = u.user_id
+                 left join tb_shop s on usm.shop_id = s.shop_id
+        <where>
+            <!--顾客查询-->
+            <if test="userShop.user != null and userShop.user.userId != null">and usm.user_id = #{userShop.user.userId}</if>
+            <if test="userShop.user != null and userShop.user.name != null">and u.name like '%${userShop.user.name}%'</if>
+            <!--商家查询-->
+            <if test="userShop.shop != null and userShop.shop.shopId != null">and usm.shop_id = #{userShop.shop.shopId}</if>
+            <if test="userShop.shop != null and userShop.shop.shopName != null">and s.shop_name like '%${userShop.shop.shopName}%'</if>
+            <!--新入会用户查询-->
+            <if test="userShop.createTime != null">usm.create_time $lt;= #{userShop.createTime}</if>
+        </where>
+    </select>
+</mapper>

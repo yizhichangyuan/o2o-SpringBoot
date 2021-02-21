@@ -1,0 +1,44 @@
+.highlight {
+    background-color: #0894ec;
+    color: white;
+}
+
+.bar-nav .button {
+    float: left;
+}
+
+.bar-header-secondary {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.infinite-scroll-preloader {
+    margin-top: -5px;
+}
+
+.product-category-button {
+    margin: 0 .3rem;
+}
+
+.product-category-button > .button {
+    width: 30%;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    display: inline-block;
+    margin: 1%;
+    overflow: hidden;
+}
+
+/*.bar-tab .active{*/
+/*    display: inline-block;*/
+/*    width: 50%;*/
+/*    float: left;*/
+/*}*/
+.highlight {
+    background-color: #0894ec;
+    color: white;
+}
+
+.product-list {
+    margin-top: 2.5rem;
+}

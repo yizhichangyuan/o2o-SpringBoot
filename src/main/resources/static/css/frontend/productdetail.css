@@ -1,0 +1,31 @@
+.card {
+    margin-bottom: 0;
+}
+
+.bar-nav .button {
+    float: left;
+}
+
+.bonus {
+    display: inline-block;
+    float: right;
+}
+
+.lastEditTime-bonus, .normal-price {
+    color: darkgray;
+    font-size: 0.6rem;
+}
+
+.promotion-price {
+    color: red;
+}
+
+.img-list {
+    margin: 0 0.5rem 0.5rem;
+}
+
+.img-list img {
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+}

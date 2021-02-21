@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imooc.o2o.dao.ProductDao">
+    <insert id="insertProduct" parameterType="com.imooc.o2o.entity.Product" useGeneratedKeys="true"
+            keyColumn="product_id" keyProperty="productId">
+        insert into tb_product(product_name, product_desc, img_addr, normal_price,
+                               promotion_price, priority, create_time, last_edit_time,
+                               enable_status, product_category_id, shop_id, point)
+        values (#{product.productName}, #{product.productDesc}, #{product.imgAddr}, #{product.normalPrice},
+                #{product.promotionPrice},
+                #{product.priority}, #{product.createTime}, #{product.lastEditTime}, #{product.enableStatus},
+                #{product.productCategory.productCategoryId}, #{product.shop.shopId}, #{product.point})
+    </insert>
+
+    <update id="updateProduct" parameterType="com.imooc.o2o.entity.Product">
+        update tb_product
+        <set>
+            <if test="product.productName != null">
+                product_name = #{product.productName},
+            </if>
+            <if test="product.productDesc != null">
+                product_desc = #{product.productDesc},
+            </if>
+            <if test="product.imgAddr != null">
+                img_addr = #{product.imgAddr},
+            </if>
+            <if test="product.normalPrice != null">
+                normal_price = #{product.normalPrice},
+            </if>
+            <if test="product.promotionPrice != null">
+                promotion_price = #{product.promotionPrice},
+            </if>
+            <if test="product.priority != null">
+                priority = #{product.priority},
+            </if>
+            <if test="product.createTime != null">
+                create_time = #{product.createTime},
+            </if>
+            <if test="product.lastEditTime != null">
+                last_edit_time = #{product.lastEditTime},
+            </if>
+            <if test="product.enableStatus != null">
+                enable_status = #{product.enableStatus},
+            </if>
+            <if test="product.productCategory!= null and product.productCategory.productCategoryId != null">
+                product_category_id = #{product.productCategory.productCategoryId},
+            </if>
+            <if test="product.point != null">
+                point = #{product.point}
+            </if>
+        </set>
+        where product_id = #{product.productId} and shop_id = #{product.shop.shopId}
+    </update>
+
+    <resultMap id="productMap" type="com.imooc.o2o.entity.Product">
+        <id property="productId" column="product_id"/>
+        <result property="productName" column="product_name"/>
+        <result property="productDesc" column="product_desc"/>
+        <result property="imgAddr" column="img_addr"/>
+        <result property="normalPrice" column="normal_price"/>
+        <result property="promotionPrice" column="promotion_price"/>
+        <result property="priority" column="product_priority"/>
+        <result property="createTime" column="product_create_time"/>
+        <result property="lastEditTime" column="product_last_edit_time"/>
+        <result property="enableStatus" column="product_enable_status"/>
+        <result property="point" column="point"/>
+        <association property="productCategory" column='product_category_id'
+                     javaType="com.imooc.o2o.entity.ProductCategory">
+            <id property="productCategoryId" column="product_category_id"/>
+            <result property="productCategoryName" column="product_category_name"/>
+            <result property="priority" column="product_category_priority"/>
+            <result property="createTime" column="product_category_create_time"/>
+            <result property="shopId" column="product_category_shop_id"/>
+        </association>
+        <association property="shop" javaType="com.imooc.o2o.entity.Shop" column="shop_id">
+            <id property="shopId" column="shop_id"/>
+            <result property="owner.userId" column="owner_id"/>
+            <result column="shop_name" property="shopName"/>
+            <result column="shop_desc" property="shopDesc"/>
+            <result column="shop_addr" property="shopAddr"/>
+            <result column="phone" property="phone"/>
+            <result column="shop_img" property="shopImg"/>
+            <result column="shop_priority" property="priority"/>
+            <result column="shop_create_time" property="createTime"/>
+            <result column="shop_last_edit_time" property="lastEditTime"/>
+            <result column="shop_enable_status" property="enableStatus"/>
+            <result column="advice" property="advice"/>
+        </association>
+        <collection property="productImgList" column='product_id' ofType="com.imooc.o2o.entity.ProductImg"
+                    javaType="java.util.List">
+            <id property="productImgId" column="product_img_id"/>
+            <result property="imgAddr" column="product_img_addr"/>
+            <result property="priority" column="product_img_priority"/>
+            <result property="createTime" column="product_img_create_time"/>
+            <result property="productId" column="product_id"/>
+        </collection>
+    </resultMap>
+
+    <select id="getProductById" resultMap="productMap">
+        select p.product_id,
+               p.product_name,
+               p.product_desc,
+               p.img_addr,
+               p.normal_price,
+               p.promotion_price,
+               p.priority       as product_priority,
+               p.create_time    as product_create_time,
+               p.last_edit_time as product_last_edit_time,
+               p.enable_status  as product_enable_status,
+               p.point,
+               pc.product_category_id,
+               pc.product_category_name,
+               pc.priority      as product_category_priority,
+               pc.create_time   as product_category_create_time,
+               pc.shop_id       as product_category_shop_id,
+               s.shop_id,
+               s.shop_name,
+               s.shop_desc,
+               s.phone,
+               s.create_time    as shop_create_time,
+               s.owner_Id,
+               pi.product_img_id,
+               pi.priority      as product_img_priority,
+               pi.img_addr      as product_img_addr,
+               pi.create_time   as product_img_create_time
+        from tb_product p
+                 left join tb_product_category pc on p.product_category_id = pc.product_category_id
+                 left join tb_shop s on p.shop_id = s.shop_id
+                 left join tb_product_img pi on p.product_id = pi.product_id
+        where p.product_id = #{productId}
+        order by pi.priority desc;
+    </select>
+
+    <select id="queryProductList" resultMap="productMap">
+        select product_id,product_name,product_desc,img_addr,normal_price,promotion_price,priority as
+        product_priority,create_time as product_create_time,point,
+        last_edit_time as product_last_edit_time,enable_status as product_enable_status from tb_product
+        <where>
+            <if test="productCondition.shop != null and productCondition.shop.shopId != null">
+                and shop_id = #{productCondition.shop.shopId}
+            </if>
+            <if test="productCondition.productCategory != null and productCondition.productCategory.productCategoryId != null">
+                and product_category_id = #{productCondition.productCategory.productCategoryId}
+            </if>
+            <!--这里使用$标识符，而不是使用#，使用#会进行转义添加单引号，而$不会-->
+            <if test="productCondition.productName != null">
+                and product_name like "%${productCondition.productName}%"
+            </if>
+            <if test="productCondition.enableStatus != null">
+                and enable_status = #{productCondition.enableStatus}
+            </if>
+            order by priority desc limit #{rowIndex},#{pageSize}
+        </where>
+    </select>
+
+    <select id="queryProductCount" resultType="int">
+        select count(1) from tb_product
+        <where>
+            <if test="productCondition.shop != null and productCondition.shop.shopId != null">
+                and shop_id = #{productCondition.shop.shopId}
+            </if>
+            <if test="productCondition.productCategory != null and productCondition.productCategory.productCategoryId != null">
+                and product_category_id = #{productCondition.productCategory.productCategoryId}
+            </if>
+            <!--这里使用$标识符，而不是使用#，使用#会进行转义添加单引号，而$不会-->
+            <if test="productCondition.productName != null">
+                and product_name like concat("%",#{productCondition.productName},"%")
+            </if>
+            <if test="productCondition.enableStatus != null">
+                and enable_status = #{productCondition.enableStatus}
+            </if>
+        </where>
+    </select>
+
+    <update id="alterProductCategoryToNull">
+        update tb_product
+        set product_category_id = null
+        where product_category_id = #{productCategoryId};
+    </update>
+</mapper>

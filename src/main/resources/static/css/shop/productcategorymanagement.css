@@ -1,0 +1,27 @@
+.row-productCategory {
+    border: 1px solid #999;
+    padding: .5rem;
+    border-bottom: none;
+}
+
+.row-productCategory:last-child {
+    border-bottom: 1px solid #999;
+}
+
+.productCategory-name {
+    white-space: nowrap;
+    overflow-x: scroll;
+}
+
+.category-input {
+    border: none;
+    background-color: #eee;
+}
+
+.row-productCategory button {
+    border-color: lightskyblue;
+}
+
+.mb {
+    margin-bottom: .5rem;
+}

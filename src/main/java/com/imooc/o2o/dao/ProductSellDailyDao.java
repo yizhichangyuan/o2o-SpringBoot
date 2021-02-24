@@ -13,4 +13,6 @@ public interface ProductSellDailyDao {
                                                  @Param("beginTime") Date beginTime, @Param("endTime") Date endTime);
 
     int insertProductSellDaily();
+
+    int insertDefaultProductSellDaily();
 }

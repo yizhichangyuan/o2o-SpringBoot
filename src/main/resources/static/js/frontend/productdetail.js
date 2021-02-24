@@ -1,5 +1,6 @@
 $(function () {
     var getProductDetail = "/o2o/frontend/getproductdetail?productId=";
+    var generateQRCode = "/o2o/frontend/generateproductqr?productId=";
     var productId = getQueryString("productId");
     // 打开侧边栏
     $("#me").click(function () {
@@ -26,10 +27,18 @@ $(function () {
                 imgList.map(function (img, index) {
                     imgHtml += "<img alt='" + img.imgDesc + "' src='.." + img.imgAddr + "'/>";
                 });
+                // 如果需要二维码
+                if(data.needQRcode){
+                    imgHtml += "<img src='" + generateQRCode + productId + "'/>"
+                }
                 $(".img-list").html(imgHtml);
-            } else {
+            }else {
                 $.toast(data.errMsg);
             }
         }
     });
+
+    function getQRCode(){
+
+    }
 });

@@ -29,7 +29,7 @@ public class AwardDaoTest {
         award.setAwardDesc("test");
         award.setAwardImg("test");
         award.setPoint(1);
-        award.setShopId(83);
+        award.setShopId(83L);
         award.setPriority(1);
         award.setCreateTime(new Date());
         award.setLastEditTime(new Date());
@@ -42,7 +42,7 @@ public class AwardDaoTest {
     public void testBUpdateAward(){
         Award award = new Award();
         award.setAwardName("修改名称");
-        award.setAwardId(1);
+        award.setAwardId(1L);
         int effectNum = awardDao.updateAward(award);
         assertEquals(effectNum, 1);
     }

@@ -1,11 +1,19 @@
 $(function () {
     // 决定登陆后是前往前台展示页面还是后台
-    var userType = getQueryString("userType");
     var login = "/o2o/local/logincheck";
     var count = 0;
     var verify = false;
 
-    $("#login").on("click", function () {
+    // 填充默认账号密码给游客体验
+    defaultPSD();
+
+    function defaultPSD(){
+        $("#userName").val('test');
+        $("#password").val('123456');
+    }
+
+    $("#loginCheck").on("click", function () {
+        var userType = getQueryString("userType");
         var userName = $("#userName").val();
         var password = $("#password").val();
         var verifyCode = $("#j_kaptcha").val();

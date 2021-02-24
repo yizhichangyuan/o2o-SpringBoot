@@ -26,7 +26,7 @@
         from tb_shop_auth_map sam
         left join tb_shop s on s.shop_id = sam.shop_id
         left join tb_person_info u on sam.employee_id = u.user_id
-        where sam.shop_id = #{shopId} order by sam.create_time desc limit #{rowIndex},#{pageSize};
+        where sam.shop_id = #{shopId} order by sam.shop_auth_id asc,sam.create_time asc limit #{rowIndex},#{pageSize};
     </select>
 
     <select id="queryShopAuthMapCount" resultType="int">

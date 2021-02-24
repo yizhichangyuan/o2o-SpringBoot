@@ -14,4 +14,6 @@ public interface UserProductMapDao {
     int queryUserProductCount(@Param("userProduct")UserProductMap userProductMap);
 
     int insertUserProduct(UserProductMap userProductMap);
+
+    int updateUserProduct(@Param("point") int point, @Param("userShopId") long userShopId);
 }

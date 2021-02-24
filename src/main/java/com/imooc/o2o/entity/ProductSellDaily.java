@@ -12,6 +12,8 @@ import java.util.Date;
 public class ProductSellDaily implements Serializable {
     private static final long serialVersionUID = -16561799001498426L;
 
+    private Integer productSellDailyId;
+
     private Product Product;
 
     private Shop shop;
@@ -25,6 +27,14 @@ public class ProductSellDaily implements Serializable {
      * 统计日期，每天统计一次
      */
     private Date days;
+
+    public Integer getProductSellDailyId() {
+        return productSellDailyId;
+    }
+
+    public void setProductSellDailyId(Integer productSellDailyId) {
+        this.productSellDailyId = productSellDailyId;
+    }
 
     public com.imooc.o2o.entity.Product getProduct() {
         return Product;

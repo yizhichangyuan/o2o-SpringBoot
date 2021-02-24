@@ -54,11 +54,11 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         // todo 首先将对应商品的商品类别设置为未分类
         try {
             int effectNum = productDao.alterProductCategoryToNull(productCategory.getProductCategoryId());
-            if (effectNum <= 0) {
+            if (effectNum < 0) {
                 throw new ProductException("商品的商品类别置空失败");
             }
             effectNum = productCategoryDao.deleteProductCategory(productCategory);
-            if (effectNum > 0) {
+            if (effectNum >= 0) {
                 return new ProductCategoryExecution(ProductCategoryStateEnum.SUCCESS);
             } else {
                 throw new ProductCategoryException("删除商品类别失败");

@@ -1,0 +1,21 @@
+.row-award{
+    border: 1px solid #999;
+    border-bottom: none;
+}
+
+.award-wrap:last-child {
+    border-bottom: 1px solid #999;
+}
+
+.award-name {
+    white-space: nowrap;
+    overflow-x: scroll;
+}
+
+.award-wrap a {
+    margin-right: 0.5rem;
+}
+
+.input-search{
+    margin: 0 0;
+}

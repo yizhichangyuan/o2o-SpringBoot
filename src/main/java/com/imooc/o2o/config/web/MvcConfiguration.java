@@ -2,6 +2,7 @@ package com.imooc.o2o.config.web;
 
 
 import com.google.code.kaptcha.servlet.KaptchaServlet;
+import com.imooc.o2o.interceptors.ErrorPageInterceptor;
 import com.imooc.o2o.interceptors.LoginInterceptor;
 import com.imooc.o2o.interceptors.ShopPermissionInterceptor;
 import org.springframework.beans.factory.annotation.Value;
@@ -139,8 +140,14 @@ public class MvcConfiguration implements WebMvcConfigurer {
         InterceptorRegistration loginIR = registry.addInterceptor(new LoginInterceptor());
         // 配置拦截的路径
         loginIR.addPathPatterns(interceptorPath);
+        // 拦截前台奖品兑换路径
+        loginIR.addPathPatterns("/frontend/awardexchange");
         // 不拦截扫描二维码对员工进行授权的路径
         loginIR.excludePathPatterns("/shopadmin/addshopauthmap");
+        // 不拦截兑换二维码路径
+        loginIR.excludePathPatterns("/shopadmin/awardexchange");
+        // 不拦截商品兑换二维码
+        loginIR.excludePathPatterns("/shopadmin/productexchange");
         // 在定义其他的拦截器
         InterceptorRegistration permissionIR = registry.addInterceptor(new ShopPermissionInterceptor());
         // 配置拦截的路径
@@ -153,10 +160,19 @@ public class MvcConfiguration implements WebMvcConfigurer {
         /**不拦截原因，在这里才开始将currentShop放入到session中**/
         permissionIR.excludePathPatterns("/shopadmin/shopmanagement");
         permissionIR.excludePathPatterns("/shopadmin/getshopmanagementinfo");
+        // 不拦截注册店铺的路径
         permissionIR.excludePathPatterns("/shopadmin/registershop");
+        permissionIR.excludePathPatterns("/shopadmin/getshopinitinfo");
         permissionIR.excludePathPatterns("/shopadmin/shopoperation");
         // 不拦截扫描二维码对员工进行授权的路径
         permissionIR.excludePathPatterns("/shopadmin/addshopauthmap");
+        // 不拦截兑换二维码路径
+        permissionIR.excludePathPatterns("/shopadmin/awardexchange");
+        // 不拦截商品兑换二维码
+        permissionIR.excludePathPatterns("/shopadmin/productexchange");
+
+        // 不设置路径默认拦截所有页面
+        InterceptorRegistration errorPageInterceptor = registry.addInterceptor(new ErrorPageInterceptor());
     }
 
     @Override

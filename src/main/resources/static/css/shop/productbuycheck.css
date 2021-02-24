@@ -1,0 +1,35 @@
+.row-productbuy {
+    border: 1px solid #999;
+    border-bottom: none;
+}
+
+.row-productbuy:last-child {
+    border-bottom: 1px solid #999;
+}
+
+/*.row-productbuy div{*/
+/*    margin-left: 30px;*/
+/*    overflow-x: scroll;*/
+/*}*/
+
+/*.row-productbuy div:first-child{*/
+/*    margin-left: 0px;*/
+/*}*/
+
+/*.row-productbuy div:last-child{*/
+/*    margin-right: 0px;*/
+/*}*/
+
+
+.product-name {
+    white-space: nowrap;
+    overflow-x: scroll;
+}
+
+/*.product-wrap a {*/
+/*    margin-right: 1rem;*/
+/*}*/
+
+.input-search{
+    margin: 0 0;
+}

@@ -13,7 +13,7 @@ public class Product {
     private List<ProductImg> productImgList; //商品详情图列表
     private ProductCategory productCategory;
     private Shop shop;
-    private int point; // 商品积分
+    private Integer point; // 商品积分
 
     // 管理信息
     private Integer priority;
@@ -21,7 +21,7 @@ public class Product {
     private Date lastEditTime;
     private Integer enableStatus; //商品状态，0表示下架不可用，1表示上架
 
-    public int getPoint() {
+    public Integer getPoint() {
         return point;
     }
 

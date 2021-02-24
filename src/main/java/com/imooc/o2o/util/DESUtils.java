@@ -79,5 +79,8 @@ public class DESUtils {
     public static void main(String[] args) {
         System.out.println(getEncryptString("root")); //输出：B9AlO0AeWHk=
         System.out.println(getEncryptString("make1234")); // 输出：uO8i96kcyxN4Ttw6PQZiZg==
+        System.out.println(getEncryptString("eb1dd891dffa3d6a4154d0031e1f3dea"));
+        System.out.println(getDecryptString("djjqxtbL5XP1kUXIhUuuvFOigeq9BLycDKdfvLwhDLd4Ttw6PQZiZg=="));
+
     }
 }

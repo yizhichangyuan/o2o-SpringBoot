@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>店铺详情</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="shortcut icon" href="../resources/img/watermark.jpg">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
@@ -22,6 +22,10 @@
                 class="icon icon-left"></span> 返回
         </a>
         <h1 class="title">店铺名</h1>
+        <a class="button button-link button-nav pull-right exchange-award " external
+           href="#" data-transition='slide-out'>积分兑换 <span
+                class="icon icon-right"></span>
+        </a>
     </header>
 
     <!-- 工具栏 -->
@@ -106,12 +110,15 @@
 <!-- popup, panel 等放在这里 -->
 <div class="panel-overlay"></div>
 <!-- Left Panel with Reveal effect -->
-<div class="panel panel-left panel-reveal">
+<div class="panel panel-right panel-reveal" id="panel-js-demo">
     <div class="content-block">
-        <p><a href="/o2o/local/accountbind?userType=1">绑定账号</a></p>
-        <p><a href="/o2o/local/changepswpage?userType=1">修改密码</a></p>
+        <p><a href="/o2o/local/accountbind?userType=1" class="close-panel">绑定账号</a></p>
+        <p><a href="/o2o/local/changepswpage?userType=1" class="close-panel">修改密码</a></p>
         <!-- Click on link with "close-panel" class will close panel -->
-        <p><a href="#" id="logout" data-usertype="1">退出登录</a></p>
+        <p><a href="/o2o/frontend/userawardpage" class="close-panel">兑换记录</a></p>
+        <p><a href="/o2o/frontend/userproductpage" class="close-panel">消费记录</a></p>
+        <p><a href="#" id="login" data-usertype="1" class="close-panel">登录</a></p>
+        <p><a href="#" id="logout" data-usertype="1" class="close-panel">退出登录</a></p>
         <p><a href="#" class="close-panel">关闭</a></p>
     </div>
 </div>
@@ -120,6 +127,5 @@
 <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
 <script type='text/javascript' src='../resources/js/frontend/shopdetailpage.js' charset='utf-8'></script>
 <script type='text/javascript' src='../resources/js/common/common.js' charset='utf-8'></script>
-<script type="text/javascript" src="../resources/js/local/logout.js" charset="utf-8"></script>
 </body>
 </html>

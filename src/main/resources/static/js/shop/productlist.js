@@ -9,14 +9,14 @@ $(function () {
             success: function (data) {
                 if (data.success) {
                     var tempHtml = "";
-                    console.log(data.productList);
+                    // console.log(data.productList);
                     data.productList.map(function (term, index) {
-                        console.log(term);
-                        tempHtml += "<div class='row row-product'>" + "<div class='col-40 product-name'>" + term.productName + "</div>"
-                            + "<div class='col-40'>" + term.point + "</div>"
-                            + "<div class='col-20'>" + addOperation(term.productId, term.enableStatus) + "</div></div>";
+                        // console.log(term);
+                        tempHtml += "<div class='row row-product'>" + "<div class='col-30 product-name'>" + term.productName + "</div>"
+                            + "<div class='col-20'>" + term.point + "</div>"
+                            + "<div class='col-50'>" + addOperation(term.productId, term.enableStatus) + "</div></div>";
                     });
-                    console.log(tempHtml);
+                    // console.log(tempHtml);
                     $(".product-wrap").html(tempHtml);
                 } else {
                     $.toast(data.errMsg);
@@ -32,15 +32,15 @@ $(function () {
         }
         var editUrl = "<a href='/o2o/shopadmin/productoperation?productId=" + productId + "'>" + "编辑</a>";
         var pullUrl = "<a href='#' class='pulldown' id='" + productId + "' data-status='" + enableStatus + "'>" + pullText + "</a>";
-        var previewUrl = "<a href='#'>" + "预览</a>";
+        var previewUrl = "<a href='/o2o/frontend/productdetail?productId=" + productId + "'>" + "预览</a>";
         return editUrl + pullUrl + previewUrl;
     }
 
     $(".pulldown").live("click", function () {
         var productId = $(this).attr("id");
-        console.log($(this).data('status'));
+        // console.log($(this).data('status'));
         var enableStatus = 1 - $(this).data("status");
-        console.log(enableStatus);
+        // console.log(enableStatus);
         var product = {productId: productId, enableStatus: enableStatus};
         $.ajax({
             url: "/o2o/shopadmin/modifyproduct",

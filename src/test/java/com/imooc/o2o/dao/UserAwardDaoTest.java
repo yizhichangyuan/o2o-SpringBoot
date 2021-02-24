@@ -29,7 +29,7 @@ public class UserAwardDaoTest {
         PersonInfo operator = new PersonInfo();
         operator.setUserId(5L);
         Award award = new Award();
-        award.setAwardId(2);
+        award.setAwardId(2L);
         Shop shop = new Shop();
         shop.setShopId(79L);
         userAward.setAward(award);
@@ -46,7 +46,7 @@ public class UserAwardDaoTest {
 
     @Test
     public void testBUpdateUserAward(){
-        userAwardMapDao.updateUserAward(5L, 1L, new Date(), 0);
+        userAwardMapDao.updateUserAward(5L, 1L, new Date(), 0, 5L);
     }
 
     @Test

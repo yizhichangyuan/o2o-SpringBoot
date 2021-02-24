@@ -14,7 +14,7 @@ public interface UserAwardMapDao {
     int deleteUserAward(long userAwardId);
 
     int updateUserAward(@Param("userId") long userId, @Param("userAwardId") long userAwardId,
-                        @Param("lastEditTime") Date lastEditTime, @Param("usedStatus") int usedStatus);
+                        @Param("lastEditTime") Date lastEditTime, @Param("usedStatus") int usedStatus, @Param("operatorId") Long operatorId);
 
     UserAwardMap queryUserAwardById(long userAwardId);
 

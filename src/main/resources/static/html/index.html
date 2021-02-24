@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>商店列表</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
+</head>
+<body>
+<!-- page 容器 -->
+<div class="page">
+    <!-- 这里是页面内容区 -->
+    <div class="content" style="text-align:center;">
+        <p>平台支持微信账号和账号密码两种方式</p>
+        <p><font size="2">由于微信账号授权需开通服务号企业认证，所以现阶段使用微信登录只能先关注测试号授权后才可使用微信登录
+                 此外也可使用默认账号登陆</font></p>
+        <hr/>
+        <h2>微信登录</h2>
+        <div class="content-block" style="text-align:center;">
+            <h4>使用微信登录，请先关注该测试号</h4>
+            <img src="/o2o/resources/img/wechat-test-account.png" width="256px" height="256px"/>
+            <h4>微信登陆前台入口</h4>
+            <img src="/o2o/qrCode/generateQRCode?status=3"/>
+            <h4>微信登陆商家入口</h4>
+            <img src="/o2o/qrCode/generateQRCode?status=4"/>
+        </div>
+        <hr/>
+        <h2>默认账号密码登陆</h2>
+        <div class="content-block" style="text-align:center;">
+            <h4>前台入口</h4>
+            <img src="/o2o/qrCode/generateQRCode?status=1"/>
+            <h4>商家入口</h4>
+            <img src="/o2o/qrCode/generateQRCode?status=2"/>
+        </div>
+    </div>
+</div>
+
+<!-- popup, panel 等放在这里 -->
+<div class="panel-overlay"></div>
+<!-- Left Panel with Reveal effect -->
+<div class="panel panel-right panel-reveal" id="panel-js-demo">
+    <div class="content-block">
+        <p><a href="/o2o/local/accountbind?userType=1" class="close-panel">绑定账号</a></p>
+        <p><a href="/o2o/local/changepswpage?userType=1" class="close-panel">修改密码</a></p>
+        <!-- Click on link with "close-panel" class will close panel -->
+        <p><a href="/o2o/frontend/userawardpage" class="close-panel">兑换记录</a></p>
+        <p><a href="/o2o/frontend/userproductpage" class="close-panel">消费记录</a></p>
+        <p><a href="#" id="login" data-usertype="1" class="close-panel">登录</a></p>
+        <p><a href="#" id="logout" data-usertype="1" class="close-panel">退出登录</a></p>
+        <p><a href="#" class="close-panel">关闭</a></p>
+    </div>
+</div>
+
+<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.js' charset='utf-8'></script>
+<script type='text/javascript' src='../resources/js/frontend/index.js' charset='utf-8'></script>
+<script type="text/javascript" src="../resources/js/common/common.js" charset="utf-8"></script>
+</body>
+</html>

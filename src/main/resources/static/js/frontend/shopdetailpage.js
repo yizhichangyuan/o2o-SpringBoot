@@ -46,7 +46,7 @@ $(function () {
                 if (data.success) {
                     var productList = "";
                     data.productList.map(function (product, index) {
-                        productList += "              <div class=\"card\" data-productId='" + product.productId + "'>\n" +
+                        productList += "              <div class=\"card product\" data-productId='" + product.productId + "'>\n" +
                             "                            <div class=\"card-header\">" + product.productName + "</div>\n" +
                             "                            <div class=\"card-content\">\n" +
                             "                                <div class=\"list-block media-list\">\n" +
@@ -65,7 +65,7 @@ $(function () {
                             "                                </div>\n" +
                             "                            </div>\n" +
                             "                            <div class=\"card-footer\">\n" +
-                            "                                <span id=\"last-edit-time\">" + product.lastEditTime + "</span>\n" +
+                            "                                <span id=\"last-edit-time\">" + transfer(product.lastEditTime)+ "</span>\n" +
                             "                                <span><a href=\"#\">点击查看</a></span>\n" +
                             "                            </div>\n" +
                             "                        </div>";
@@ -128,9 +128,13 @@ $(function () {
         $.init(); //事件注销了，需要重新将事件初始化回来
     });
 
-    $(".card").live("click", function () {
+    $(".product").live("click", function () {
         var productId = $(this).data("productid");
         window.location.href = productDetail + productId;
+    });
+
+    $(".exchange-award").on("click", function(){
+        window.location.href = "/o2o/frontend/shopawardexchange?shopId=" + shopId;
     });
 
     // 初始化page，并且同时class为page的元素需要添加一个class为page-current的属性，无限滚动才能运行！！！

@@ -45,7 +45,8 @@
         update tb_user_award_map
         <set>
             <if test="usedStatus != null">used_status = #{usedStatus},</if>
-            <if test="lastEditTime != null">last_edit_time = #{lastEditTime}</if>
+            <if test="lastEditTime != null">last_edit_time = #{lastEditTime},</if>
+            <if test="operatorId != null">operator_id = #{operatorId}</if>
         </set>
         where user_award_id = #{userAwardId} and user_id = #{userId};
     </update>
@@ -85,7 +86,7 @@
            <!--商品可用状态查询-->
             <if test="userAward.award != null and userAward.award.enableStatus != null">and a.award_name = #{userAward.award.enableStatus}</if>
         </where>
-        order by ua.last_edit_time desc limit #{rowIndex},#{pageSize};
+        order by ua.create_time desc limit #{rowIndex},#{pageSize};
     </select>
 
     <select id="queryUserAwardCount" resultType="int">

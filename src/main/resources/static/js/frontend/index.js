@@ -20,7 +20,7 @@ $(function () {
                         autoplayDisableOnInteraction: false
                     });
                     var shopParentCategoryHtml = "";
-                    console.log(data.shopCategoryList);
+                    // console.log(data.shopCategoryList);
                     data.shopCategoryList.map(function (shopCategory, index) {
                         shopParentCategoryHtml += "<div class='shop-classify col-50' data-shopCategryId='" + shopCategory.shopCategoryId + "'>"
                             + "<div class='word'>" +
@@ -30,6 +30,7 @@ $(function () {
                             "' style='width: 2.2rem;'></div>" + "</div>"
                     });
                     $(".list-block").html(shopParentCategoryHtml);
+                    loginCheck(data.loginStatus);
                 }
             }
         })

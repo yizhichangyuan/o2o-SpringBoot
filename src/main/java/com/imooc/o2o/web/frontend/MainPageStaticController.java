@@ -26,4 +26,24 @@ public class MainPageStaticController {
     private String productDetail() {
         return "frontend/productdetail";
     }
+
+    @RequestMapping(value="/shopawardexchange")
+    public String shopAwardExchange(){
+        return "frontend/shopawardexchange";
+    }
+
+    @RequestMapping(value="/userawardpage")
+    public String userAwardPage(){
+        return "frontend/userawardpage";
+    }
+
+    @RequestMapping(value="/awardexchangestatus")
+    public String awardExchangeStatus(){
+        return "frontend/awardexchangestatus";
+    }
+
+    @RequestMapping(value="/userproductpage")
+    public String userProductPage(){
+        return "frontend/userproductpage";
+    }
 }

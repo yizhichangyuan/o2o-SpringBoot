@@ -6,8 +6,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.imooc.o2o.dto.UserAccessToken;
 import com.imooc.o2o.dto.WechatUser;
 import com.imooc.o2o.entity.PersonInfo;
+import com.imooc.o2o.util.DESUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -17,8 +20,24 @@ import java.io.*;
 import java.net.ConnectException;
 import java.net.URL;
 
+@Configuration
 public class WechatUtil {
     private static Logger logger = LoggerFactory.getLogger(WechatUtil.class);
+
+    public static String appId;
+
+    private static String appSecret;
+
+
+//    @Value("${wechat.appid}")
+//    public void setAppId(String appId) {
+//        WechatUtil.appId = appId;
+//    }
+//
+//    @Value("${wechat.appsecret}")
+//    public void setAppsecret(String appsecret) {
+//        WechatUtil.appSecret = appsecret;
+//    }
 
     public static UserAccessToken getUserAccessToken(String code) {
         // 测试号信息里的appId

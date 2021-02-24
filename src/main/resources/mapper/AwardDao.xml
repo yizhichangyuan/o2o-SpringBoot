@@ -52,7 +52,7 @@
         <where>
             <if test="awardCondition.awardName != null">and award_name like '%${awardCondition.awardName}%'</if>
             <if test="awardCondition.awardDesc != null">and award_name like '%${awardCondition.awardDesc}%'</if>
-            <if test="awardCondition.shopId != null">and shop_id = #{awardCondition.shopId},</if>
+            <if test="awardCondition.shopId != null">and shop_id = #{awardCondition.shopId}</if>
             <if test="awardCondition.enableStatus != null">and enable_status = ${awardCondition.enableStatus}</if>
         </where>
     </select>

@@ -58,6 +58,10 @@ $(function () {
             }).attr('id')
         };
         product.point = $("#point").val();
+        if(product.productName === null || product.normalPrice === null){
+            $("商品名或价格不得为空");
+            return;
+        }
         if (!isAdd) {
             product.productId = productId;
         }
@@ -82,6 +86,8 @@ $(function () {
             success: function (data) {
                 if (data.success) {
                     $.toast("提交成功");
+                    // 清空内容防止重复提交
+                    clearInput();
                 } else {
                     $.toast("提交失败：" + data.errMsg);
                 }

@@ -15,7 +15,7 @@ public class Award implements Serializable {
     /**
      * 积分奖品id，主键
      */
-    private Integer awardId;
+    private Long awardId;
 
     private String awardName;
 
@@ -28,7 +28,7 @@ public class Award implements Serializable {
      */
     private Integer point;
 
-    private Integer shopId;
+    private Long shopId;
 
     private Integer priority;
 
@@ -42,11 +42,11 @@ public class Award implements Serializable {
     private Integer enableStatus;
 
 
-    public Integer getAwardId() {
+    public Long getAwardId() {
         return awardId;
     }
 
-    public void setAwardId(Integer awardId) {
+    public void setAwardId(Long awardId) {
         this.awardId = awardId;
     }
 
@@ -82,11 +82,11 @@ public class Award implements Serializable {
         this.point = point;
     }
 
-    public Integer getShopId() {
+    public Long getShopId() {
         return shopId;
     }
 
-    public void setShopId(Integer shopId) {
+    public void setShopId(Long shopId) {
         this.shopId = shopId;
     }
 

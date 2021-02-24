@@ -74,4 +74,14 @@ public class PathUtil {
         String productPath = shopPath + shopId + "/" + productId + "/detail/";
         return productPath.replaceAll("/", separator);
     }
+
+    public static String getAwardSimpleImgPath(long shopId, long awardId){
+        String awardPath = shopPath + shopId + "/" + awardId;
+        return awardPath.replaceAll("/", separator);
+    }
+
+    public static String getAwardImgPath(long shopId, long awardId){
+        String awardPath = shopPath + shopId + "/" + awardId + "/detail/";
+        return awardPath.replaceAll("/", separator);
+    }
 }

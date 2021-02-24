@@ -13,6 +13,15 @@ public class WechatInfo {
     private Long userAwardId; // 用户积分奖品usedStatus修改
     private Long userProductId; // 用户消费商品是否消费
     private Long customerId; // 辅助效验用户身份
+    private Long productId;
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
 
     public Long getCustomerId() {
         return customerId;

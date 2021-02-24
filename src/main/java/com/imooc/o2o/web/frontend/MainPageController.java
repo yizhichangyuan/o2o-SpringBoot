@@ -1,10 +1,7 @@
 package com.imooc.o2o.web.frontend;
 
 import com.imooc.o2o.dto.ShopExecution;
-import com.imooc.o2o.entity.Area;
-import com.imooc.o2o.entity.HeadLine;
-import com.imooc.o2o.entity.Shop;
-import com.imooc.o2o.entity.ShopCategory;
+import com.imooc.o2o.entity.*;
 import com.imooc.o2o.enums.ShopStateEnum;
 import com.imooc.o2o.service.AreaService;
 import com.imooc.o2o.service.HeadLineService;
@@ -36,13 +33,20 @@ public class MainPageController {
 
     @RequestMapping(value = "/listmainpageinfo")
     @ResponseBody
-    private Map<String, Object> listMainPageInfo() {
+    private Map<String, Object> listMainPageInfo(HttpServletRequest request) {
         Map<String, Object> modelMap = new HashMap<>();
         try {
             HeadLine headLineCondition = new HeadLine();
             headLineCondition.setEnableStatus(1);
             List<HeadLine> headLineList = headLineService.queryHeadLineList(headLineCondition);
             List<ShopCategory> shopCategoryList = shopCategoryService.queryShopCategory(null);
+            PersonInfo user= (PersonInfo)request.getSession().getAttribute("user");
+            // 控制前台展示为登陆还是退出登录
+            if(user == null){
+                modelMap.put("loginStatus", false);
+            }else{
+                modelMap.put("loginStatus", true);
+            }
             modelMap.put("success", true);
             modelMap.put("headLineList", headLineList);
             modelMap.put("shopCategoryList", shopCategoryList);

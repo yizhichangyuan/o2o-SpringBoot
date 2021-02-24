@@ -74,4 +74,8 @@
         insert into tb_user_product_map(user_id,shop_id,product_id,operator_id,create_time,point)
         values(#{user.userId},#{shop.shopId},#{product.productId},#{operator.userId},#{createTime},#{point});
     </insert>
+
+    <update id="updateUserProduct">
+        update tb_user_shop_map set point = #{point} where user_shop_id = #{userShopId};
+    </update>
 </mapper>

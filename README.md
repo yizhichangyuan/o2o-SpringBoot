@@ -21,6 +21,7 @@
 
 
 
+
 **项目后端**
 
 使用SSM框架进行开发，后期迭代迁移为SpringBoot版本
@@ -34,6 +35,5 @@
 扫码者信息通过调用[微信测试号](https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login)回传链接获取OpenId来获取扫码者信息方便进行店家身份校验核对
 
 由于微信回传链接过长，容易造成被微信拦截，使用[缩我短链](https://suowo.cn/)API来请求实时生成短链接放入二维码中
-
 
 

@@ -11,15 +11,12 @@
 * Redis
 * Docker
 * MySQL
-* JQuery + AJAX + HTML + SUI-MOBILE
-
+* JQuery + AJAX + HTML + SUI-MOBILE + ECharts
 
 
 **项目前端**
 
-在阿里开发的手机H5应用组件[SUI MOBILE](https://sui.thinkadmin.top/)上进行开发，利用JQuery + AJAX向后端异步请求数据，进行前端展示
-
-
+在阿里开发的手机H5应用组件[SUI MOBILE](https://sui.thinkadmin.top/)上进行开发，利用JQuery + AJAX向后端异步请求数据，Echarts绘制图表展示商家商品一周销量情况，进行前端展示
 
 
 **项目后端**
@@ -31,6 +28,8 @@
 使用Redis进行缓存读多写少的数据
 
 日志打印输出使用Logback
+
+使用Quartz设置定时任务统计平台产品日销量
 
 商品、积分奖品兑换二维码使用谷歌的zXing来动态生成
 
